@@ -1,5 +1,6 @@
 import heapq
-from mapas import masmorra1, masmorra2, masmorra3 
+from masmorras_maps import masmorra1, masmorra2, masmorra3 
+from mapa_principal import Hyrule
 
 def heuristica(pos_atual, destino, menor_custo_terreno=10):
     x1, y1 = pos_atual
@@ -68,3 +69,11 @@ if __name__ == "__main__":
 
     print("\nCaminho masmorra 3:", caminho_m3)
     print("Custo total masmorra 3:", custo_m3)
+
+    # Busca Hyrule
+    inicio_H = (25, 28)  # 'P' da masmorra 3
+    fim_H = (7, 6)     # 'E' da masmorra 3
+    caminho_H, custo_H = a_star(Hyrule, inicio_H, fim_H)
+
+    print("\nCaminho Hyrule:", caminho_H)
+    print("Custo total Hyrule:", custo_H)
