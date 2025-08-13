@@ -46,6 +46,7 @@ def a_star(mapa, inicio, fim):
 
 if __name__ == "__main__":
 
+    """ 
     # Busca masmorra 1
     inicio_m1 = (14, 26)  # exemplo: posição do 'P'
     fim_m1 = (14, 4)   # exemplo: posição do 'E'
@@ -69,7 +70,8 @@ if __name__ == "__main__":
 
     print("\nCaminho masmorra 3:", caminho_m3)
     print("Custo total masmorra 3:", custo_m3)
-
+    """
+    
     # Busca Hyrule
     inicio_H = (25, 28)  # 'P' da masmorra 3
     fim_H = (7, 6)     # 'E' da masmorra 3
