@@ -2,6 +2,11 @@
 
 ---
 
+## Integrantes
+
+- Luis Eduardo Bastos Rocha - 23.1.8095
+- Gustavo Rodrigues Araújo - 23.1.8148
+
 ## 1. Visão Geral e Objetivo
 
 Este projeto simula a jornada de um herói em um mapa inspirado no jogo **The Legend of Zelda**.  
