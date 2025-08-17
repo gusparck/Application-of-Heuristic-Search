@@ -5,7 +5,7 @@ def mapa_para_matriz(mapa_str):
         for cell in linha.split("\t"):
             if cell == "G":
                 row.append(10)
-            elif cell == "S":
+            elif cell in ("S", "D"):
                 row.append(20)
             elif cell == "F":
                 row.append(100)
@@ -14,9 +14,9 @@ def mapa_para_matriz(mapa_str):
             elif cell == "A":
                 row.append(180)
             elif cell in ("D", "W", "E"):
-                row.append(0)
+                row.append(10)
             else:
-                row.append(9999)  # ou 10, se for andável por padrão
+                row.append(9999)    
         matriz.append(row)
     return matriz
 

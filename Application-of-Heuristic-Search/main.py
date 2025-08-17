@@ -35,13 +35,13 @@ CORES = {
 }
 
 def heuristica(pos_atual, destino, menor_custo_terreno=10):
-    """Calcula a heurística de distância de Manhattan."""
+    # Calcula a heurística de distância de Manhattan.
     x1, y1 = pos_atual
     x2, y2 = destino
     return (abs(x1 - x2) + abs(y1 - y2)) * menor_custo_terreno
 
 def a_star(mapa, inicio, fim):
-    """Algoritmo de busca A* para encontrar o caminho de menor custo."""
+    # Algoritmo de busca A* para encontrar o caminho de menor custo.
     if not (inicio and fim):
         return None, {}
         
@@ -87,7 +87,7 @@ def a_star(mapa, inicio, fim):
     return None, {}
 
 def mostrar_caminho(mapa_str, caminho, is_dungeon, custos_g):
-    """Mostra a animação do caminho sendo percorrido e o custo em tempo real."""
+    # Mostra a animação do caminho sendo percorrido e o custo em tempo real.
     mapa_visual = [linha.split('\t') for linha in mapa_str.strip().split("\n")]
     
     # Pega o custo total do trecho para exibir como referência
@@ -132,7 +132,7 @@ def mostrar_caminho(mapa_str, caminho, is_dungeon, custos_g):
         time.sleep(0.1)
 
 def encontrar_posicao(mapa_str, simbolo):
-    """Encontra as coordenadas (linha, coluna) de um símbolo no mapa de string."""
+    # Encontra as coordenadas (linha, coluna) de um símbolo no mapa de string.
     for i, linha in enumerate(mapa_str.strip().split("\n")):
         for j, cell in enumerate(linha.split("\t")):
             if cell == simbolo:
@@ -141,7 +141,7 @@ def encontrar_posicao(mapa_str, simbolo):
     return None
 
 def executar_rota(nome, mapa_numerico, mapa_str, inicio, fim, custo_total, is_dungeon_map=False):
-    """Executa e anima uma única rota, atualizando o custo total."""
+    # Executa e anima uma única rota, atualizando o custo total.
     caminho, custos_g = a_star(mapa_numerico, inicio, fim)
     
     if caminho is None:
@@ -158,7 +158,7 @@ def executar_rota(nome, mapa_numerico, mapa_str, inicio, fim, custo_total, is_du
     return custo_total + custo_trecho, caminho[-1]
 
 def fazer_masmorra(nome, pos_hyrule_entrada, mapa_masmorra, str_masmorra, entrada, pingente, custo_total, pos_atual):
-    """Função para executar a jornada completa de uma masmorra."""
+    # Função para executar a jornada completa de uma masmorra.
     custo_total, pos_atual = executar_rota(f"{nome} (Hyrule -> Entrada)", Hyrule, main_map_str, pos_atual, pos_hyrule_entrada, custo_total, is_dungeon_map=False)
     
     pos_no_mapa_da_masmorra = entrada
@@ -171,7 +171,7 @@ def fazer_masmorra(nome, pos_hyrule_entrada, mapa_masmorra, str_masmorra, entrad
 
 
 if __name__ == "__main__":
-    casa_link = (28, 24)
+    casa_link = (28, 25)
     lost_woods = (7, 6)
 
     masmorras_info = [
