@@ -263,6 +263,9 @@ if __name__ == "__main__":
         sys.exit(1)
 
     print("\n" + "="*50)
+    print(f"{colorama.Fore.CYAN}A MELHOR ORDEM ENCONTRADA É:")
+    ordem_nomes = " -> ".join([m['nome'] for m in melhor_ordem])
+    print(f"{colorama.Fore.CYAN}{ordem_nomes}")
     print(f"{colorama.Fore.YELLOW}CUSTO TOTAL ESTIMADO: {menor_custo_total}")
     print("="*50 + "\n")
     time.sleep(5) 
