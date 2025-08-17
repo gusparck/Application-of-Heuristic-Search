@@ -172,22 +172,28 @@ def fazer_masmorra(nome, pos_hyrule_entrada, mapa_masmorra, str_masmorra, entrad
 
 if __name__ == "__main__":
     casa_link = (28, 25)
-    lost_woods = (7, 6)
+    lost_woods = (6, 7)
 
     masmorras_info = [
         {
             "nome": "Masmorra 1", "mapa_num": masmorra1, "mapa_str": masmorra1_str,
-            "entrada_hyrule": (1, 24), "entrada_masmorra": encontrar_posicao(masmorra1_str, "E"),
+            # Coordenada corrigida conforme o PDF [6, 33] -> (33, 6)
+            "entrada_hyrule": (33, 6), 
+            "entrada_masmorra": encontrar_posicao(masmorra1_str, "E"),
             "pingente": encontrar_posicao(masmorra1_str, "P"),
         },
         {
             "nome": "Masmorra 2", "mapa_num": masmorra2, "mapa_str": masmorra2_str,
-            "entrada_hyrule": (17, 39), "entrada_masmorra": encontrar_posicao(masmorra2_str, "E"),
+            # Coordenada corrigida conforme o PDF [40, 18] -> (18, 40)
+            "entrada_hyrule": (18, 40), 
+            "entrada_masmorra": encontrar_posicao(masmorra2_str, "E"),
             "pingente": encontrar_posicao(masmorra2_str, "P"),
         },
         {
             "nome": "Masmorra 3", "mapa_num": masmorra3, "mapa_str": masmorra3_str,
-            "entrada_hyrule": (32, 5), "entrada_masmorra": encontrar_posicao(masmorra3_str, "E"),
+            # Coordenada corrigida conforme o PDF [25, 2] -> (2, 25)
+            "entrada_hyrule": (2, 25), 
+            "entrada_masmorra": encontrar_posicao(masmorra3_str, "E"),
             "pingente": encontrar_posicao(masmorra3_str, "P"),
         }
     ]
