@@ -35,27 +35,25 @@ CORES = {
 }
 
 def heuristica(pos_atual, destino, menor_custo_terreno=10):
-    # Calcula a heurística de distância de Manhattan.
     x1, y1 = pos_atual
     x2, y2 = destino
     return (abs(x1 - x2) + abs(y1 - y2)) * menor_custo_terreno
 
 def a_star(mapa, inicio, fim):
-    # Algoritmo de busca A* para encontrar o caminho de menor custo.
     if not (inicio and fim):
         return None, {}
-        
-    linhas, colunas = len(mapa), len(mapa[0])
+
+    colunas, linhas = len(mapa[0]), len(mapa)
     custos_validos = [c for linha in mapa for c in linha if c != 9999]
     menor_custo_terreno = min(custos_validos) if custos_validos else 10
-    
+
     open_list = []
     heapq.heappush(open_list, (0, inicio))
-    
+
     g = {inicio: 0}
     came_from = {}
-    
-    movimentos = [(-1, 0), (1, 0), (0, -1), (0, 1)]
+
+    movimentos = [(0, -1), (0, 1), (-1, 0), (1, 0)]  # (dx, dy)
 
     while open_list:
         _, atual = heapq.heappop(open_list)
@@ -67,15 +65,15 @@ def a_star(mapa, inicio, fim):
                 atual = came_from[atual]
             caminho.append(inicio)
             caminho.reverse()
-            # Retorna o dicionário 'g' inteiro com todos os custos
             return caminho, g
 
         x, y = atual
         for dx, dy in movimentos:
             nx, ny = x + dx, y + dy
 
-            if 0 <= nx < linhas and 0 <= ny < colunas and mapa[nx][ny] != 9999:
-                novo_custo = g[atual] + mapa[nx][ny]
+            if 1 <= nx <= colunas and 1 <= ny <= linhas and mapa[ny-1][nx-1] != 9999:
+                novo_custo = g[atual] + mapa[ny-1][nx-1]
+
                 vizinho = (nx, ny)
 
                 if vizinho not in g or novo_custo < g[vizinho]:
@@ -83,7 +81,7 @@ def a_star(mapa, inicio, fim):
                     f = novo_custo + heuristica(vizinho, fim, menor_custo_terreno)
                     heapq.heappush(open_list, (f, vizinho))
                     came_from[vizinho] = atual
-                    
+
     return None, {}
 
 def mostrar_caminho(mapa_str, caminho, is_dungeon, custos_g):
@@ -99,7 +97,7 @@ def mostrar_caminho(mapa_str, caminho, is_dungeon, custos_g):
         for y, linha_visual in enumerate(mapa_visual):
             linha_renderizada = ""
             for x, char_original in enumerate(linha_visual):
-                posicao = (y, x)
+                posicao = (x+1, y+1)  
                 char_display = char_original
 
                 if posicao == passo_atual:
@@ -132,12 +130,10 @@ def mostrar_caminho(mapa_str, caminho, is_dungeon, custos_g):
         time.sleep(0.1)
 
 def encontrar_posicao(mapa_str, simbolo):
-    # Encontra as coordenadas (linha, coluna) de um símbolo no mapa de string.
-    for i, linha in enumerate(mapa_str.strip().split("\n")):
-        for j, cell in enumerate(linha.split("\t")):
+    for y, linha in enumerate(mapa_str.strip().split("\n")):
+        for x, cell in enumerate(linha.split("\t")):
             if cell == simbolo:
-                return (i, j)
-    print(f"{colorama.Fore.RED}[AVISO] Símbolo '{simbolo}' não encontrado no mapa. O programa pode falhar.")
+                return (x+1, y+1) 
     return None
 
 def executar_rota(nome, mapa_numerico, mapa_str, inicio, fim, custo_total, is_dungeon_map=False):
@@ -171,32 +167,30 @@ def fazer_masmorra(nome, pos_hyrule_entrada, mapa_masmorra, str_masmorra, entrad
 
 
 if __name__ == "__main__":
-    casa_link = (28, 25)
-    lost_woods = (6, 7)
+    casa_link = (25, 28)      
+    lost_woods = (7, 6)
 
     masmorras_info = [
         {
             "nome": "Masmorra 1", "mapa_num": masmorra1, "mapa_str": masmorra1_str,
-            # Coordenada corrigida conforme o PDF [6, 33] -> (33, 6)
-            "entrada_hyrule": (33, 6), 
+            "entrada_hyrule": (6, 33),   
             "entrada_masmorra": encontrar_posicao(masmorra1_str, "E"),
             "pingente": encontrar_posicao(masmorra1_str, "P"),
         },
         {
             "nome": "Masmorra 2", "mapa_num": masmorra2, "mapa_str": masmorra2_str,
-            # Coordenada corrigida conforme o PDF [40, 18] -> (18, 40)
-            "entrada_hyrule": (18, 40), 
+            "entrada_hyrule": (40, 18),  
             "entrada_masmorra": encontrar_posicao(masmorra2_str, "E"),
             "pingente": encontrar_posicao(masmorra2_str, "P"),
         },
         {
             "nome": "Masmorra 3", "mapa_num": masmorra3, "mapa_str": masmorra3_str,
-            # Coordenada corrigida conforme o PDF [25, 2] -> (2, 25)
-            "entrada_hyrule": (2, 25), 
+            "entrada_hyrule": (25, 2),   
             "entrada_masmorra": encontrar_posicao(masmorra3_str, "E"),
             "pingente": encontrar_posicao(masmorra3_str, "P"),
         }
     ]
+
 
     print("Calculando custos internos das masmorras...")
     for m in masmorras_info:

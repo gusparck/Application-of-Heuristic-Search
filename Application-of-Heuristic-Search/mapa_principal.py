@@ -13,7 +13,7 @@ def mapa_para_matriz(mapa_str):
                 row.append(150)
             elif cell == "A":
                 row.append(180)
-            elif cell in ("D", "W", "E"):
+            elif cell in ("W", "E"):
                 row.append(10)
             else:
                 row.append(9999)    
